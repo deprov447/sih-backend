@@ -1,12 +1,13 @@
 const express = require("express");
+require("dotenv").config();
 const router = require("./router");
 
 const app = express();
 
 app.use(router);
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 
-app.listen(4000, () => {
+app.listen(PORT, () => {
   console.log("SIH backend online on port ", PORT);
 });
