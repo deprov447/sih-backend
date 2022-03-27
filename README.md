@@ -26,3 +26,5 @@ TID | UUID | Date:Time | Service | FeedBack | Assigned | Location |
    - Complete Transaction
      - TID
 
+- OTP
+- mail
