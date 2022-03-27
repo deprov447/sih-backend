@@ -1,7 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-require("dotenv").config();
-
+const dotenv=require("dotenv");
+dotenv.config();
+console.log(process.env.PORT)
 mongoose.connect(process.env.DB_ADDR, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

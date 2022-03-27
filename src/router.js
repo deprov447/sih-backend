@@ -1,7 +1,7 @@
+const findBestDistance = require('./distance-logic/findBestDistance')
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
 const Complain = require("./schema/complainSchema");
 
 router.get("/", (req, res) => {
@@ -57,20 +57,22 @@ router.get("/complains/page/:pg", (req, res) => {
 
 // assign complain
 router.patch("/complains/:id", (req, res) => {
-  const complainId = req.params.id;
-  const agentId = req.body.agentId;
-  console.log(agentId);
+  //  const complainId = req.params.id;
+   const agentId = req.params.id;
+  //  console.log(agentId);
+  const origin=req.body.location;
+  const toBeAssigned = Complain.find({}).then((data) => findBestDistance(origin,data));
   Complain.findOneAndUpdate(
-    { _id: complainId },
-    { agentId: agentId, isAssigned: false }
-  )
-    .then((data) => {
-      res.sendStatus(202);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
+    { _id: toBeAssigned },
+     { agentId: agentId, isAssigned: true ,isAssigned:true}
+   )
+  .then((data) => {
+       res.sendStatus(202);
+     })
+     .catch((err) => {
+       console.error(err);
+       res.sendStatus(500);
+     });
 });
 
 // complains by user
